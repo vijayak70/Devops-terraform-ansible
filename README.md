@@ -26,10 +26,10 @@ ssh-keygen -t rsa
 sripts for jenkins :
 
 
-terraform init
-terraform apply -auto-approve
-sleep 30
-ansible-playbook -i /tmp/inv -u ec2-user -b --become-method sudo web.yaml
+ terraform init
+ terraform apply -auto-approve
+ sleep 30
+ ansible-playbook -i /tmp/inv -u ec2-user -b --become-method sudo web.yaml
 
 
 
