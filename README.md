@@ -32,6 +32,13 @@ sudo amazon-linux-extras install epel
 sudo yum install ansible
 
 
+-- systemctl status jenkins
+-- vi /usr/lib/systemd/system/jenkins.service
+ replace root for jenkins in the file
+ 
+ -- systemctl daemon-reload
+ -- systemctl restart jenkins
+
 -- vi /etc/ansible/ansible.cfg
    uncomment host_key_checking=FALSE
 
