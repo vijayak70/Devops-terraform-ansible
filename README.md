@@ -24,7 +24,11 @@ give an admin role to centos host machine as it will give failure for aws config
 --- install ansible on centos host machine 
 
 sudo yum install epel-release
+sudo yum install ansible
 
+-- if using amazon linux install ansible :
+
+sudo amazon-linux-extras install epel
 sudo yum install ansible
 
 
