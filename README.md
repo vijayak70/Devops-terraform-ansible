@@ -2,6 +2,19 @@
  Terraform github ansible pipeline :
 
 ```
+if using amazon linux os instead of centos :
+
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+  768  sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+  769  yum install fontconfig java-11-openjdk
+  777  sudo amazon-linux-extras install java-openjdk11
+  778  yum install jenkins
+  779  systemctl status jenkins
+  780  systemctl start jenkins
+
+```
+
+```
 --- yum install git on centos node
 
 --- install terraform on centos host machine
