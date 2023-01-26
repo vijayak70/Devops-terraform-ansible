@@ -1,7 +1,7 @@
 
  Terraform github ansible pipeline :
 
-
+```
 --- yum install git on centos node
 
 --- install terraform on centos host machine
@@ -36,3 +36,4 @@ sripts for jenkins :
 poll the pipeleine
 *****
 
+```
