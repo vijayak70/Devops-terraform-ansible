@@ -1,63 +1,116 @@
+-- fork the github repository :
+    
+    https://github.com/ramannkhanna2/Devops-terraform-ansible.git
+    
 
- Terraform github ansible pipeline :
+--- gittbash download
+ https://git-scm.com/downloads
+ 
+ ---- clone the github repo :
+     
+git clone https://github.com/ramannkhanna2/Devops-terraform-ansible.git
+  510  ls
+  511  clear
+  512  cd Devops-terraform-ansible/
 
-```
-if using amazon linux os instead of centos :
 
-sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
-  768  sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-  769  yum install fontconfig java-11-openjdk
-  777  sudo amazon-linux-extras install java-openjdk11
-  778  yum install jenkins
-  779  systemctl status jenkins
-  780  systemctl start jenkins
+---- creation of jenkins server :
+    
+CentOS 7 (x86_64) - with Updates HVM
 
-```
+sg :22,80,8080
 
-```
---- yum install git on centos node
+--- log into my server and change the hostname to jenkins ....
 
---- install terraform on centos host machine
+=========================================
+jenkins deploymnt :
 
-give an admin role to centos host machine as it will give failure for aws configure whle building
+yum update -y
+yum install wget -y
+
+---   https://pkg.jenkins.io/redhat-stable/
+
+publicIP:8080
+
+systemctl status jenkins
+systemctl start jenkins
+
+--- follow the steps on the application and be on homepage of jenkins
+
+===================================================
+
+---- to provide jenkins root previlegs :
+
+
+systemctl status jenkins
+
+vi /usr/lib/systemd/system/jenkins.service
+
+
+
+# Unix account that runs the Jenkins daemon
+# Be careful when you change this, as you need to update the permissions of
+# $JENKINS_HOME, $JENKINS_LOG, and (if you have already run Jenkins)
+# $JENKINS_WEBROOT.
+User=root
+Group=root
+
+
+
+systemctl daemon-reload
+
+systemctl restart jenkins
+
+-- confirm if it has the access now to make configuration changes on server
+
+========================================================================
+
+
+creating the workflow :
+
+
+add the vcs to my project 
+
+-- install terraform on jenkins server
+
+https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
+
+
+------ create a role on aws to authenticate ur aws account to ur jenkin server
+
+admin-role
+attach the role to jenkins server
+
+=================================================
 
 --- install ansible on centos host machine 
 
 sudo yum install epel-release
 sudo yum install ansible
 
--- if using amazon linux install ansible :
-
-sudo amazon-linux-extras install epel
-sudo yum install ansible
-
-
--- systemctl status jenkins
--- vi /usr/lib/systemd/system/jenkins.service
- replace root for jenkins in the file
- 
- -- systemctl daemon-reload
- -- systemctl restart jenkins
 
 -- vi /etc/ansible/ansible.cfg
    uncomment host_key_checking=FALSE
 
 
---- create a keypair on centos hostmachine to import a keypair named raman-import on aws ohio region to authenticate :
+--- create a keypair on centos hostmachine to import a keypair named raman-import on aws virginia region to authenticate :
 ssh-keygen -t rsa
--- import the public key to ohio in creation raman-import key
-
-sripts for jenkins :
+-- import the public key to virginia in creation raman-import key
 
 
- terraform init
- terraform apply -auto-approve
- sleep 30
- ansible-playbook -i /tmp/inv -u ec2-user -b --become-method sudo web.yaml
+----- build ur pipeline 
+
+============================================
+
+-- create a polll 
+* * * * *
+
+----- use the gitbash to push the change
+
+ vi web.yaml
+  519  git add .
+  520  git commit -m " updated the end content"
+  521  git push origin main
 
 
-
-poll the pipeleine
-*****
-
-```
+======================================================================================
