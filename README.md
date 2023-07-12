@@ -99,6 +99,14 @@ ssh-keygen -t rsa
 -- import the public key to virginia in creation raman-import key
 
 
+workflow :
+
+terraform init
+terraform apply -auto-approve
+sleep 10
+ansible-playbook -i /tmp/inv -u ec2-user -b --become-method sudo web.yaml
+
+
 ----- build ur pipeline 
 
 ============================================
