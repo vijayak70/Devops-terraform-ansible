@@ -8,16 +8,16 @@ pipeline {
             }
         }
 
-        stage('Apply Terraform') {
-            steps {
-                sh 'terraform apply -auto-approve'
-            }
-        }
-
         stage('Security Testing for Terraform') {
             steps {
                 // Run tfspec tests
-                sh 'trivy conf .'
+                sh 'tfsec'
+            }
+        }
+
+        stage('Apply Terraform') {
+            steps {
+                sh 'terraform apply -auto-approve'
             }
         }
 
