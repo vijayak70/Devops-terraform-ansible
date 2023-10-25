@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Initialize Terraform') {
+            steps {
+                sh 'terraform init'
+            }
+        }
+
+        stage('Apply Terraform') {
+            steps {
+                sh 'terraform apply -auto-approve'
+            }
+        }
+
+        stage('Security Testing for Terraform') {
+            steps {
+                // Run tfspec tests
+                sh 'tfspec'
+            }
+        }
+
+        stage('Wait for Deployment') {
+            steps {
+                sleep 10
+            }
+        }
+
+        stage('Run Ansible Playbook') {
+            steps {
+                sh 'ansible-playbook -i /tmp/inv -u ec2-user -b --become-method sudo web.yaml'
+            }
+        }
+
+        stage('Security Testing for Ansible') {
+            steps {
+                // Run InSpec tests
+                sh 'inspec exec <path_to_InSpec_profile>'
+            }
+        }
+    }
+
+    post {
+        failure {
+            // If any previous stage fails, mark the build as unstable
+            unstable("Security testing or deployment stage failed.")
+        }
+    }
+}
