@@ -36,7 +36,7 @@ pipeline {
         stage('InSpec Testing') {
             steps {
                 // Run InSpec tests using the inspec command
-                sh 'inspec exec web_controls.rb'
+                sh 'inspec exec web_control.rb -t ec2-user@$'
             }
         }
     }
