@@ -32,6 +32,13 @@ pipeline {
                 sh 'ansible-playbook -i /tmp/inv -u ec2-user -b --become-method sudo web.yaml'
             }
         }
+
+        stage('InSpec Testing') {
+            steps {
+                // Run InSpec tests using the inspec command
+                sh 'inspec exec web_controls.rb'
+            }
+        }
     }
 
     post {
