@@ -30,7 +30,7 @@ pipeline {
         stage('Security Testing for Ansible') {
             steps {
                 // Run InSpec tests
-                sh 'inspec exec <path_to_InSpec_profile>'
+                sh 'inspec exec .'
             }
         }
 
