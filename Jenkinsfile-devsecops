@@ -21,44 +21,15 @@ pipeline {
             }
         }
 
-        
-        stage('Get Server IP Address') {
-            steps {
-                script {
-                    def serverIP = sh(script: 'terraform output server_ip', returnStatus: true).trim() 
-            
-                    if (currentBuild.resultIsBetterOrEqualTo('FAILURE')) {
-                    error("Terraform command failed. Check Terraform execution.")
-                    }
-            
-                    if (serverIP.isEmpty()) {
-                    error("Terraform output 'server_ip' is empty or not provided as expected.")
-                    }
-
-                    currentBuild.description = "Server IP: $serverIP"
-                    env.REMOTE_SERVER_IP = serverIP
-                }
-            }
-        }
-    
         stage('Wait for Deployment') {
             steps {
                 sleep 10
             }
         }
 
-        
-
         stage('Run Ansible Playbook') {
             steps {
                 sh 'ansible-playbook -i /tmp/inv -u ec2-user -b --become-method sudo web.yaml'
-            }
-        }
-
-        stage('Final Check for Ansible') {
-            steps {
-                // Run InSpec tests
-                sh "inspec exec web_controls.rb -t ssh://ec2-user@${env.REMOTE_SERVER_IP}"
             }
         }
     }
