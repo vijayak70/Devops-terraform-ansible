@@ -17,7 +17,7 @@ pipeline {
         stage('Security Testing for Terraform') {
             steps {
                 // Run tfspec tests
-                sh 'tfspec'
+                sh 'trivy conf .'
             }
         }
 
