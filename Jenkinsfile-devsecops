@@ -7,14 +7,14 @@ pipeline {
                 sh 'terraform init'
             }
         }
-/*
+
         stage('Security Testing for Terraform') {
             steps {
                 // Run tfspec tests
                 sh 'tfsec'
             }
         }
-*/
+
         stage('Apply Terraform') {
             steps {
                 sh 'terraform apply -auto-approve'
