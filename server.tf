@@ -8,10 +8,10 @@ terraform {
 }
 
 provider "aws" {
-region = "us-east-1"
+region = "ap-south-1"
 }
 resource "aws_instance" "myawsserver" {
-  ami = "ami-0f844a9675b22ea32"
+  ami = "ami-0d92749d46e71c34c"
   instance_type = "t2.micro"
   key_name = "raman-import"
 
