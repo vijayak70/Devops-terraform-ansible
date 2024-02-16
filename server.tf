@@ -8,17 +8,17 @@ terraform {
 }
 
 provider "aws" {
-region = "ap-south-1"
+region = "us-east-1"
 }
 resource "aws_instance" "myawsserver" {
-  ami = "ami-06b72b3b2a773be2b"
+  ami = "ami-0cf10cdf9fcd62d37"
   instance_type = "t2.micro"
-  key_name = "raman-import"
+  key_name = "gagan-import"
 
   tags = {
-    Name = "Raman-DevOps-batch-server"
+    Name = "gagan-DevOps-batch-server"
     env = "Production"
-    owner = "Raman Khanna"
+    owner = "Gagan Deep"
   }
   provisioner "local-exec" {
     command = "echo The servers IP address is ${self.public_ip} && echo ${self.public_ip} > /tmp/inv"
