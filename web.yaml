@@ -14,4 +14,4 @@
     - name: add user
       user:
         name: raman
-        state: present
+        state: absent
