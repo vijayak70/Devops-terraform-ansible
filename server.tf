@@ -13,10 +13,10 @@ region = "us-east-1"
 resource "aws_instance" "myawsserver" {
   ami = "ami-0cf10cdf9fcd62d37"
   instance_type = "t2.micro"
-  key_name = "gagan-import"
+  key_name = "raman-import"
 
   tags = {
-    Name = "gagan-DevOps-batch-server"
+    Name = "raman-DevOps-batch-server"
     env = "Production"
     owner = "Gagandeep"
   }
